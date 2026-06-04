@@ -18,7 +18,7 @@ import java.util.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class User implements UserDetails {
+public class User{
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -49,11 +49,11 @@ public class User implements UserDetails {
 
     @Builder.Default
     @Column(name = "EMAIL_VERIFIED", nullable = false)
-    private Boolean emailVerified = false;
+    private boolean emailVerified = false;
 
     @Builder.Default
     @Column(name = "IS_BANNED", nullable = false)
-    private Boolean banned = false;
+    private boolean banned = false;
 
     @Column(name = "BAN_REASON", length = 500)
     private String banReason;
@@ -68,31 +68,6 @@ public class User implements UserDetails {
     @UpdateTimestamp
     @Column(name = "UPDATED_AT", nullable = false)
     private Instant updatedAt;
-
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_" + role.name()));
-    }
-
-    @Override
-    public String getUsername() { return email; }
-
-    @Override public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override public boolean isAccountNonLocked() {
-        return !banned;
-    }
-
-    @Override public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override public boolean isEnabled() {
-        return !banned;
-    }
 
     @Override
     public boolean equals(Object o) {
