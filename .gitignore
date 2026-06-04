@@ -31,3 +31,8 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### production ###
+/src/main/resources/application-prod.yml
+target/
+*.class

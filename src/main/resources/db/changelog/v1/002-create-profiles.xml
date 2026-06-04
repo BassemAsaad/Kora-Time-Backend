@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <!-- ── Player Profile ─────────────────────────────────────────────── -->
+    <changeSet id="002-create-player-profiles" author="BassemAsaad">
+        <createTable tableName="PLAYER_PROFILES">
+
+            <column name="ID" type="VARCHAR2(36)">
+                <constraints primaryKey="true" primaryKeyName="PK_PLAYER_PROFILES" nullable="false"/>
+            </column>
+
+            <column name="USER_ID" type="VARCHAR2(36)"
+                    remarks="FK to USERS. One player profile per user.">
+                <constraints nullable="false" unique="true"
+                             uniqueConstraintName="UK_PLAYER_PROFILE_USER"
+                             foreignKeyName="FK_PLAYER_PROFILE_USER"
+                             references="USERS(ID)"/>
+            </column>
+
+                <column name="REPUTATION_SCORE" type="NUMBER(5,2)" defaultValueNumeric="0"
+                        remarks="Managers rate players after matches. Shown on public profile.">
+                    <constraints nullable="false"/>
+                </column>
+
+            <column name="LATE_CANCELLATION_COUNT" type="NUMBER(5,0)" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+    </changeSet>
+
+    <!-- ── Manager Profile ────────────────────────────────────────────── -->
+    <changeSet id="002-create-manager-profiles" author="BassemAsaad">
+        <createTable tableName="MANAGER_PROFILES">
+
+            <column name="ID" type="VARCHAR2(36)">
+                <constraints primaryKey="true" primaryKeyName="PK_MANAGER_PROFILES" nullable="false"/>
+            </column>
+
+            <column name="USER_ID" type="VARCHAR2(36)">
+                <constraints nullable="false" unique="true"
+                             uniqueConstraintName="UK_MANAGER_PROFILE_USER"
+                             foreignKeyName="FK_MANAGER_PROFILE_USER"
+                             references="USERS(ID)"/>
+            </column>
+
+            <column name="NATIONAL_ID" type="VARCHAR2(14)"
+                    remarks="Required at registration to distinguish from players.">
+                <constraints nullable="false" unique="true"
+                             uniqueConstraintName="UK_MANAGER_NATIONAL_ID"/>
+            </column>
+
+            <column name="VERIFIED" type="NUMBER(1,0)" defaultValueNumeric="0"
+                    remarks="Admin manually verifies managers before they can add stadiums.">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+    </changeSet>
+
+    <!-- ── Admin Profile ──────────────────────────────────────────────── -->
+    <changeSet id="002-create-admin-profiles" author="BassemAsaad">
+        <createTable tableName="ADMIN_PROFILES">
+
+            <column name="ID" type="VARCHAR2(36)">
+                <constraints primaryKey="true" primaryKeyName="PK_ADMIN_PROFILES" nullable="false"/>
+            </column>
+
+            <column name="USER_ID" type="VARCHAR2(36)">
+                <constraints nullable="false" unique="true"
+                             uniqueConstraintName="UK_ADMIN_PROFILE_USER"
+                             foreignKeyName="FK_ADMIN_PROFILE_USER"
+                             references="USERS(ID)"/>
+            </column>
+
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

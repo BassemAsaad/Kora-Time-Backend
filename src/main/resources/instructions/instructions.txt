@@ -1,0 +1,15 @@
+Commit message format — Conventional Commits:
+feat(auth): add JWT refresh token endpoint
+fix(booking): prevent double booking on same slot
+test(stadium): add unit tests for StadiumService
+refactor(user): extract UserFactory from AuthServiceImpl
+chore(config): add application-dev.yml with Oracle XE config
+docs(readme): add project setup instructions
+
+
+git checkout -b feature/phase-1-auth develop
+# ... code + tests ...
+git add src/main/... src/test/...
+git commit -m "feat(auth): add user registration with role-based profile creation"
+git commit -m "test(auth): add unit tests for AuthService register and login"
+git checkout develop && git merge feature/phase-1-auth

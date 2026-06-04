@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: kora-time
+  profiles:
+    active: dev
+server:
+  port: 8080
+
+springdoc:
+  api-docs:
+    path: /api/docs
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+
