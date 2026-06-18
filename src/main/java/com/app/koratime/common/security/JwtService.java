@@ -23,7 +23,6 @@ public class JwtService {
     private final AppProperties appProperties;
 
     public String generateAccessToken(final UserPrincipal principal) {
-
         return buildToken(principal, "access", appProperties.getJwt().getAccessTokenExpirationMs());
     }
 
@@ -87,7 +86,7 @@ public class JwtService {
     }
 
     public String extractEmail(String token) {
-        return extractClaim(token, claims -> claims.get("email", String.class));
+        return extractClaim(token, Claims::getSubject);
     }
 
     public boolean isAccessToken(String token) {

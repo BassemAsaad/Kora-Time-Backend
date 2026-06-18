@@ -1,7 +1,7 @@
 package com.app.koratime.common.security;
 
 import com.app.koratime.common.exception.BusinessViolatedException;
-import com.app.koratime.user.model.UserRole;
+import com.app.koratime.user.model.Role;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -26,7 +26,7 @@ public final class SecurityUtils {
         return getCurrentUser().getId();
     }
 
-    public static boolean isCurrentUserRule(UserRole role) {
+    public static boolean isCurrentUserRule(Role role) {
         return Objects.equals(getCurrentUser().getRole(), role);
     }
 }

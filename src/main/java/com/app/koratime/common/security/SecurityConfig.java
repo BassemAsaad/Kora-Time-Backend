@@ -25,7 +25,7 @@ public class SecurityConfig {
     private final JwtAuthenticationFilter authFilter;
     private final CustomUserDetailsService userDetailsService;
     private final static String[] WHITE_ENDPOINTS = {
-            "/auth/**", "/swagger-ui/**", "/swagger-ui.html", "api-docs/**", "/actuator/health"
+            "/auth/**", "/swagger-ui/**", "/swagger-ui.html", "/api-docs/**", "/actuator/health"
     };
 
     @Bean
@@ -37,7 +37,12 @@ public class SecurityConfig {
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(WHITE_ENDPOINTS)
+                        .requestMatchers(
+                                "/auth/**",
+                                "/swagger-ui/**",
+                                "/swagger-ui.html",
+                                "/api-docs/**",
+                                "/actuator/health")
                         .permitAll().anyRequest().authenticated()
                 )
                 .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class)

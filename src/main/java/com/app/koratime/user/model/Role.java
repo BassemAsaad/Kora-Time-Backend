@@ -1,6 +1,6 @@
 package com.app.koratime.user.model;
 
-public enum UserRole {
+public enum Role {
     PLAYER,
     MANAGER,
     ADMIN

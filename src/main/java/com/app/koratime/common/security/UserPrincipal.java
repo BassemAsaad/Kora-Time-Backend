@@ -1,7 +1,7 @@
 package com.app.koratime.common.security;
 
 import com.app.koratime.user.model.User;
-import com.app.koratime.user.model.UserRole;
+import com.app.koratime.user.model.Role;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +22,7 @@ public class UserPrincipal implements UserDetails {
     private final UUID id;
     private final String email;
     private final String password;
-    private final UserRole role;
+    private final Role role;
     private final boolean banned;
 
     public static UserPrincipal from(User user) {
@@ -44,7 +44,7 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public @Nullable String getPassword() {
-        return "";
+        return password;
     }
 
     @Override
