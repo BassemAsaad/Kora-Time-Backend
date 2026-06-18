@@ -2,7 +2,6 @@ package com.app.koratime.common.exception;
 
 import com.app.koratime.common.response.ApiResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.checkerframework.checker.units.qual.A;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;

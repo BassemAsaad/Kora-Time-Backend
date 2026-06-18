@@ -37,5 +37,4 @@ public class AppProperties {
         private int refillSeconds;
     }
 
-
 }

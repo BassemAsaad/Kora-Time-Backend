@@ -3,12 +3,12 @@ package com.app.koratime.user.model;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.hibernate.type.SqlTypes;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Entity
@@ -23,6 +23,7 @@ public class User{
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(updatable = false, nullable = false, columnDefinition = "VARCHAR2(36)")
+    @JdbcTypeCode(SqlTypes.VARCHAR)
     private UUID id;
 
     @Column(name = "FIRST_NAME", nullable = false)
@@ -45,7 +46,7 @@ public class User{
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private UserRole role;
+    private Role role;
 
     @Builder.Default
     @Column(name = "EMAIL_VERIFIED", nullable = false)
@@ -59,15 +60,15 @@ public class User{
     private String banReason;
 
     @Column(name = "BANNED_AT")
-    private Instant bannedAt;
+    private LocalDateTime bannedAt;
 
     @CreationTimestamp
     @Column(name = "CREATED_AT",nullable = false)
-    private Instant createdAt;
+    private LocalDateTime createdAt;
 
     @UpdateTimestamp
     @Column(name = "UPDATED_AT", nullable = false)
-    private Instant updatedAt;
+    private LocalDateTime updatedAt;
 
     @Override
     public boolean equals(Object o) {

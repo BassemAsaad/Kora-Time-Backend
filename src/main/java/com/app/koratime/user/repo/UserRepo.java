@@ -1,7 +1,8 @@
 package com.app.koratime.user.repo;
 
 import com.app.koratime.user.model.User;
-import com.app.koratime.user.model.UserRole;
+import com.app.koratime.user.model.Role;
+import org.reactivestreams.Publisher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -21,7 +22,7 @@ public interface UserRepo extends JpaRepository<User, UUID> {
     Optional<User> findByPhoneNumber(String phoneNumber);
     boolean existsByPhoneNumber(String phoneNumber);
 
-    Page<User> findAllByRole(UserRole role, Pageable pageable);
+    Page<User> findAllByRole(Role role, Pageable pageable);
 
     @Query("""
             SELECT u from User u
@@ -34,5 +35,5 @@ public interface UserRepo extends JpaRepository<User, UUID> {
             )
             ORDER BY u.createdAt DESC
 """)
-    Page<User> search(@Param("search") String search, @Param("role") UserRole role, Pageable pageable);
+    Page<User> search(@Param("search") String search, @Param("role") Role role, Pageable pageable);
 }

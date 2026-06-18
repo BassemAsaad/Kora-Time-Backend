@@ -7,7 +7,7 @@ public final class UserFactory {
     private UserFactory() {}
 
     public static User buildUser(
-            String email, String password, String firstName, String lastName, String phoneNumber, UserRole role) {
+            String firstName, String lastName, String email, String password,  String phoneNumber, Role role) {
         return User.builder()
                 .email(email)
                 .password(password)
