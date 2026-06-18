@@ -32,7 +32,7 @@ public class JwtService {
 
     private String buildToken(UserPrincipal principal, String tokenType, long tokenExpirationMs) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put("id", principal.getId());
+        claims.put("id", principal.getId().toString());
         claims.put("role", principal.getRole());
         claims.put("type", tokenType);
 
@@ -82,7 +82,8 @@ public class JwtService {
 
 
     public UUID extractUserId(String token) {
-        return extractClaim(token, claims -> claims.get("id", UUID.class));
+        String userId = extractClaim(token, claims -> claims.get("id", String.class));
+        return UUID.fromString(userId);
     }
 
     public String extractEmail(String token) {
