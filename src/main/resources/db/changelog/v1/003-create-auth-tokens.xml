@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="003-create-email-verification-tokens" author="BassemAsaad">
+        <createTable tableName="EMAIL_VERIFICATION_TOKENS">
+
+            <column name="ID" type="VARCHAR2(36)">
+                <constraints primaryKey="true" primaryKeyName="PK_EMAIL_VERIFICATION_TOKENS" nullable="false"/>
+            </column>
+
+            <column name="USER_ID" type="VARCHAR2(36)">
+                <constraints
+                        nullable="false"
+                        foreignKeyName="FK_EMAIL_TOKEN_USER"
+                        references="USERS(ID)"
+                />
+            </column>
+
+            <column name="TOKEN" type="VARCHAR2(36)">
+                <constraints nullable="false" unique="true" uniqueConstraintName="UK_EMAIL_TOKEN"/>
+            </column>
+
+            <column name="EXPIRES_AT" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="IS_USED" type="NUMBER(1,0)" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+    </changeSet>
+
+    <changeSet id="003-create-password-reset-tokens" author="koratime">
+        <createTable tableName="PASSWORD_RESET_TOKENS">
+
+            <column name="ID" type="VARCHAR2(36)">
+                <constraints primaryKey="true" primaryKeyName="PK_PASSWORD_RESET_TOKENS" nullable="false"/>
+            </column>
+
+            <column name="USER_ID" type="VARCHAR2(36)">
+                <constraints
+                        nullable="false"
+                        foreignKeyName="FK_RESET_TOKEN_USER"
+                        references="USERS(ID)"
+                />
+            </column>
+
+            <column name="TOKEN" type="VARCHAR2(36)">
+                <constraints nullable="false" unique="true" uniqueConstraintName="UK_RESET_TOKEN"/>
+            </column>
+
+            <column name="EXPIRES_AT" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="IS_USED" type="NUMBER(1,0)" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

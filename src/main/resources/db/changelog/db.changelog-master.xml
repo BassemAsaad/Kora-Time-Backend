@@ -18,7 +18,7 @@
     <include file="v1/002-create-profiles.xml"
              relativeToChangelogFile="true"/>
 
-<!--    <include file="v1/003-create-auth-tokens.xml"-->
-<!--             relativeToChangelogFile="true"/>-->
+    <include file="v1/003-create-auth-tokens.xml"
+             relativeToChangelogFile="true"/>
 
 </databaseChangeLog>
