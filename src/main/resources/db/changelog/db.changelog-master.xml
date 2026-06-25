@@ -30,4 +30,7 @@
     <include file="v1/006-create-stadium-operating-days.xml"
              relativeToChangelogFile="true"/>
 
+    <include file="v1/007-create-notifications.xml"
+             relativeToChangelogFile="true"/>
+
 </databaseChangeLog>
