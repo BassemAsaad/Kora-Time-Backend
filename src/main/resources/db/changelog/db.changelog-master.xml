@@ -21,4 +21,13 @@
     <include file="v1/003-create-auth-tokens.xml"
              relativeToChangelogFile="true"/>
 
+    <include file="v1/004-create-stadiums.xml"
+             relativeToChangelogFile="true"/>
+
+    <include file="v1/005-create-stadium-images.xml"
+             relativeToChangelogFile="true"/>
+
+    <include file="v1/006-create-stadium-operating-days.xml"
+             relativeToChangelogFile="true"/>
+
 </databaseChangeLog>
