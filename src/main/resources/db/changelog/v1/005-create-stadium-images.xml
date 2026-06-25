@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="005_create_stadium_images" author="BassemAsaad" runOnChange="true">
+        <createTable tableName="STADIUM_IMAGES">
+            <column name="ID" type="VARCHAR(36)">
+                <constraints primaryKey="true" primaryKeyName="PK_STADIUM_IMAGES" nullable="false"/>
+            </column>
+            
+            <column name="STADIUM_ID" type="VARCHAR(36)">
+                <constraints foreignKeyName="FK_IMAGE_STADIUN" references="STADIUMS(ID)" nullable="false"/>
+            </column>
+
+            <column name="IMAGE_URL" type="VARCHAR(500)" remarks="Cloudinary CDN URL returned after upload.">
+                <constraints nullable="false"/>
+            </column>
+            
+            <column name="PUBLIC_ID" type="VARCHAR(200)"
+                    remarks="Cloudinary public_id needed to delete the image later.">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="UPLOADED_AT" type="TIMESTAMP"
+                    defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createIndex tableName="STADIUM_IMAGES" indexName="IDX_IMAGE_STADIUM">
+            <column name="STADIUM_ID"></column>
+        </createIndex>
+
+    </changeSet>
+</databaseChangeLog>

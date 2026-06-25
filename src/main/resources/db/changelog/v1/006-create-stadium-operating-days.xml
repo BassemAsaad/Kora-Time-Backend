@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="006-create-stadium-operating-days" author="BassemAsaad" runOnChange="true">
+        <createTable tableName="STADIUM_OPERATING_DAYS">
+            
+            <column name="STADIUM_ID" type="VARCHAR(36)">
+                <constraints foreignKeyName="FK_OPERATING_DAY_STADIUM" references="STADIUMS(ID)" nullable="false"/>
+            </column>
+
+            <column name="OPERATING_DAY" type="VARCHAR(10)" remarks="DayOfWeek enum: MONDAY, TUESDAY, ... SUNDAY">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey tableName="STADIUM_OPERATING_DAYS"
+                       columnNames="STADIUM_ID, OPERATING_DAY"
+                       constraintName="PK_STADIUM_OPERATING_DAYS"/>
+    </changeSet>
+</databaseChangeLog>

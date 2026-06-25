@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="004-create-stadiums" author="BassemAsaad" runOnChange="true">
+
+        <createTable tableName="STADIUMS">
+
+            <column name="ID" type="VARCHAR(36)">
+                <constraints primaryKey="true" primaryKeyName="PK_STADIUMS" nullable="false"/>
+            </column>
+
+            <column name="MANAGER_ID" type="VARCHAR(36)">
+                <constraints foreignKeyName="FK_STADIUM_MANAGER" references="USERS(ID)" nullable="false"/>
+            </column>
+
+            <column name="NAME" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="DESCRIPTION" type="VARCHAR(200)"/>
+
+            <column name="PRICE_PER_HOUR" type="NUMBER(10,2)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="OPENING_HOUR" type="NUMBER(2,0)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="CLOSING_HOUR" type="NUMBER(2,0)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="PHONE" type="VARCHAR2(11)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="LATITUDE" type="NUMBER(10,7)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="LONGITUDE" type="NUMBER(10,7)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="ADDRESS" type="VARCHAR(150)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="CITY" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            
+            <column name="CANCELLATION_WINDOW_HOURS" type="NUMBER(3,0)" defaultValueNumeric="2"
+                    remarks="How many hours before the booking cancellation is still free.">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="CANCELLATION_PENALTY_ENABLE" type="NUMBER(1,0)" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="CREATED_AT" type="TIMESTAMP"
+                    defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="UPDATED_AT" type="TIMESTAMP"
+                    defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        
+        <createIndex tableName="STADIUMS" indexName="IDX_STADIUM_MANAGER">
+            <column name="MANAGER_ID"/>
+        </createIndex>
+        
+        <createIndex tableName="STADIUMS" indexName="IDX_STADIUM_LATITUDE_LONGITUDE">
+            <column name="LATITUDE"/>
+            <column name="LONGITUDE"/>
+        </createIndex>
+
+    </changeSet>
+
+</databaseChangeLog>
