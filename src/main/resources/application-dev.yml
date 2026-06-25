@@ -46,7 +46,7 @@ app:
     capacity: 20          # max 20 requests
     refill-tokens: 20     # refill to 20
     refill-seconds: 60    # every 60 seconds
-    #  cloudinary:
-    #    cloud-name: ${CLOUDINARY_NAME:placeholder}
-    #    api-key: ${CLOUDINARY_KEY:placeholder}
-    #    api-secret: ${CLOUDINARY_SECRET:placeholder}
+  cloudinary:
+    cloud-name: dvg4aa4af
+    api-key: 166378235953592
+    api-secret: I0fDTgqfXyBQHT1GIZE0gdbOfZI
