@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="007-create-notifications" author="BassemAsaad" runOnChange="true">
+        <createTable tableName="NOTIFICATIONS">
+            <column name="ID" type="VARCHAR(36)">
+                <constraints primaryKey="true" primaryKeyName="PK_NOTIFICATIONS" nullable="false"/>
+            </column>
+
+            <column name="USER_ID" type="VARCHAR(36)">
+                <constraints foreignKeyName="FK_NOTIFICATION_USER" references="USERS(ID)" nullable="false"/>
+            </column>
+
+            <column name="TYPE" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="TITLE" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="BODY" type="VARCHAR(1000)"/>
+
+            <column name="REFERENCE_ID" type="VARCHAR(36)"
+                    remarks="What kind of entity REFERENCE_ID points to, e.g. BOOKING."/>
+
+            <column name="REFERENCE_TYPE" type="VARCHAR2(50)"
+                    remarks="What kind of entity REFERENCE_ID points to, e.g. BOOKING."/>
+
+            <column name="IS_READ" type="NUMBER(1,0)" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="CREATED_AT" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        
+        <createIndex tableName="NOTIFICATIONS" indexName="IDX_NOTIFICATION_USER_READ">
+            <column name="USER_ID"/>
+            <column name="IS_READ"/>
+        </createIndex>
+
+    </changeSet>
+</databaseChangeLog>
