@@ -147,13 +147,13 @@ public class AuthServiceImplTest {
         AuthResponse authResponse = authServiceImpl.register(playerRequest);
 
         // assert
-        assertThat(authResponse.getAccessToken())
+        assertThat(authResponse.accessToken())
                 .isEqualTo("access-token");
 
-        assertThat(authResponse.getRefreshToken())
+        assertThat(authResponse.refreshToken())
                 .isEqualTo("refresh-token");
 
-        assertThat(authResponse.getUser().email())
+        assertThat(authResponse.user().email())
                 .isEqualTo("player@test.com");
 
         assertThat(user.getRole())
@@ -213,13 +213,13 @@ public class AuthServiceImplTest {
         AuthResponse authResponse = authServiceImpl.register(managerRequest);
 
         // assert
-        assertThat(authResponse.getAccessToken())
+        assertThat(authResponse.accessToken())
                 .isEqualTo("access-token");
 
-        assertThat(authResponse.getRefreshToken())
+        assertThat(authResponse.refreshToken())
                 .isEqualTo("refresh-token");
 
-        assertThat(authResponse.getUser().email())
+        assertThat(authResponse.user().email())
                 .isEqualTo("manager@test.com");
 
         assertThat(user.getRole())
@@ -333,14 +333,16 @@ public class AuthServiceImplTest {
         when(jwtService.generateRefreshToken(any()))
                 .thenReturn("refresh-token");
         // act
-        AuthResponse response = authServiceImpl.login(loginRequest);
+        AuthResponse authResponse = authServiceImpl.login(loginRequest);
 
         // assert
-        assertThat(response.getAccessToken())
+        assertThat(authResponse.accessToken())
                 .isEqualTo("access-token");
-        assertThat(response.getRefreshToken())
+
+        assertThat(authResponse.refreshToken())
                 .isEqualTo("refresh-token");
-        assertThat(response.getUser())
+
+        assertThat(authResponse.user())
                 .isEqualTo(userSummary);
 
         verify(authenticationManager, times(1)).authenticate(authToken);
@@ -385,11 +387,11 @@ public class AuthServiceImplTest {
 
         AuthResponse response = authServiceImpl.refreshToken(tokenRequest);
 
-        assertThat(response.getAccessToken())
+        assertThat(response.accessToken())
                 .isEqualTo("new-access-token");
-        assertThat(response.getRefreshToken())
+        assertThat(response.refreshToken())
                 .isEqualTo(tokenRequest.refreshToken());
-        assertThat(response.getUser()).isEqualTo(userSummary);
+        assertThat(response.user()).isEqualTo(userSummary);
 
         verify(jwtService, times(1)).isRefreshToken(tokenRequest.refreshToken());
         verify(jwtService, times(1)).isTokenValid(tokenRequest.refreshToken());

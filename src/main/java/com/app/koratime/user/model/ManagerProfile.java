@@ -22,7 +22,6 @@ public class ManagerProfile {
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private UUID id;
 
-
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID", nullable = false, unique = true)
     private User user;
